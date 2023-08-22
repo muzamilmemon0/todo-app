@@ -1,0 +1,34 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Complete React tutorial",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Complete React tutorial",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "title": "Go for a run",
+      "completed": true
+    },
+    {
+      "id": 4,
+      "title": "Read a book",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "title": "Write a blog post",
+      "completed": true
+    },
+    {
+      "title": "he",
+      "completed": "completed",
+      "id": 6
+    }
+  ]
+}
