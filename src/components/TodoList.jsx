@@ -48,6 +48,24 @@ function TodoList() {
       .catch((error) => console.log("Error while updating todo: ", error));
   };
 
+  // Update todo
+  const updateTodo = (id, updatedTodo) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === id ? updatedTodo : todo))
+    );
+    // Send PUT request to JSON Server to update the todo item
+    fetch(`http://localhost:5000/todos/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedTodo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Todo updated:", data);
+      })
+      .catch((error) => console.error("Error updating todo:", error));
+  };
+
   // Fetch all todos
   useEffect(() => {
     fetch("http://localhost:5000/todos")
@@ -68,6 +86,7 @@ function TodoList() {
             onAddTodo={addTodo}
             onToggleStatus={toggleCompletion}
             onDelete={deleteTodo}
+            onUpdate={updateTodo}
           />
         </>
       ))}

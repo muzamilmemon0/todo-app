@@ -2,12 +2,12 @@
   "todos": [
     {
       "id": 1,
-      "title": "Complete React tutorial",
+      "title": "Complete React Projecttt",
       "completed": false
     },
     {
       "id": 2,
-      "title": "Complete React tutorial",
+      "title": "Complete Degree",
       "completed": true
     },
     {
@@ -26,9 +26,19 @@
       "completed": true
     },
     {
-      "title": "he",
+      "title": "Get Internship",
       "completed": "completed",
       "id": 6
+    },
+    {
+      "title": "go karachi",
+      "completed": "completed",
+      "id": 7
+    },
+    {
+      "title": "ertetr",
+      "completed": false,
+      "id": 8
     }
   ]
 }
