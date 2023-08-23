@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Todo from "./Todo";
+import TodoForm from "./TodoForm";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -17,9 +18,13 @@ function TodoList() {
     fetch(`http://localhost:5000/todos/${id}`, {
       method: "DELETE",
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Todo deleted:", data);
+      .then(() => {
+        // After successful deletion, reassign IDs
+        const updatedTodos = todos.map((todo, index) => ({
+          ...todo,
+          id: index + 1,
+        }));
+        setTodos(updatedTodos);
       })
       .catch((error) => console.error("Error deleting todo:", error));
   };
@@ -37,11 +42,14 @@ function TodoList() {
     // Update the UI and state
     setTodos(updatedTodos);
 
+    // Find the specific todo that was toggled
+    const toggledTodo = updatedTodos.find((todo) => todo.id === id);
+
     // Send PUT request to JSON Server to update the todo item
     fetch(`http://localhost:5000/todos/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedTodos.find((todo) => todo.id)),
+      body: JSON.stringify(toggledTodo), // Send the toggled todo object
     })
       .then((response) => response.json())
       .then((data) => console.log("Todo updated: ", data))
@@ -77,9 +85,10 @@ function TodoList() {
       .catch((error) => console.log("Error fetching todos: ", error));
   }, []);
   return (
-    <div>
-      {todos.map((todo) => (
-        <>
+    <>
+      <TodoForm onAddTodo={addTodo} />
+      <div>
+        {todos.map((todo) => (
           <Todo
             todo={todo}
             key={todo.id}
@@ -88,9 +97,9 @@ function TodoList() {
             onDelete={deleteTodo}
             onUpdate={updateTodo}
           />
-        </>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 }
 

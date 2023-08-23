@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function TodoForm() {
+function TodoForm({ onAddTodo }) {
   const [formData, setFormData] = useState({ title: "", completed: false });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -22,11 +22,7 @@ function TodoForm() {
     // Create a new todo object
     const newTodo = { title: formData.title, completed: formData.completed };
 
-    console.log("Title: ", formData.title);
-    console.log("Status: ", formData.completed);
-
     // Send POST request to JSON server
-
     fetch("http://localhost:5000/todos", {
       method: "POST",
       headers: {
